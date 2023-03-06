@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Hospital</title>
+</head>
+<style>
+
+</style>
+
+<div style="text-align:center; margin-top:200px; font-size: 30px;">
+
+    <body>
+    <div class="wrapper-btn">
+        <a th:href="@{/hospitals}">
+            <button class="btn btn-primary" type="button"><~~</button>
+        </a>
+    </div>
+    <form th:action="@{/hospitals/{id}/updateHospital(id=${oldHospital.getId()})}"
+          th:object="${oldHospital}"
+          th:method="POST">
+        <div>
+            <label>
+                <input th:field="*{name}" placeholder="Hospital Name" >
+                <p style="color: red"  th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+            </label>
+        </div>
+
+        <div>
+            <label>
+                <input th:field="*{address}" placeholder="address" >
+            </label>
+        </div>
+
+        <div>
+            <input type="submit" value="update">
+        </div>
+    </form>
+    </body>
+</div>
+</html>

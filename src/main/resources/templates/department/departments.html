@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:margin-top="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello y name is </title>
+</head>
+<body>
+<div class="wrapper-btn">
+    <a th:href="@{/hospitals/profile/{id}(id=${hospitalId})}">
+        <button class="btn btn-primary" type="button"><~~</button>
+    </a>
+</div>
+   <h6>DEPARTMENT</h6>
+<h6><tr> Hospital Name</tr>
+<h4 th:text="${hospital.name}"> Hospital</h4></h6>
+
+<table class="table">
+    <thead  >
+
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">NAME </th>
+        <th scope="col">ass doctor </th>
+    </tr>
+    </thead >
+    <tbody
+    >
+
+    <tr th:each="departmenta : ${ departments}" >
+        <th scope="row" th:text="${departmenta.id}">id</th>
+        <th scope="row" th:text="${departmenta.name}"> name</th>
+
+        <th>
+        <form th:method="GET" th:action="@{/departments/deleteDepartment/{departmentId}(departmentId=${departmenta.id})}">
+            <input type="submit" value="DELETE">
+        </form></th>
+        <th>
+            <form th:method="GET" th:action="@{/departments/{departmentId}/editDepartment(departmentId=${departmenta.id})}">
+                <input type="submit" value="UPDATE">
+            </form></th>
+
+
+    </tr>
+
+
+    </tbody>
+</table>
+<div style="text-align:center; margin:auto; font-size: 30px;">
+    <form th:method="GET" th:action="@{/departments/addDepartment/{hospitalId}(hospitalId=${hospitalId})}"><form><input type="submit" value="   + add department  "></form></form></div>
+
+</body>
+</html>

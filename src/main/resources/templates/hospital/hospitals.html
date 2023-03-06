@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <style>table,
+    td {
+        border: 1px solid #333333FF;
+        margin-top: 200px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 25px;
+    }
+    tfoot {
+        background-color: #333333FF;
+        color: #FFFFFFFF;
+    }
+    </style>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            padding: 3px;
+        }
+    </style>
+</head>
+<body>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Profile</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Update</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="hospital:${hospitals}">
+        <th scope="row" th:text="${hospital.id}">id</th>
+        <td th:text="${hospital.name}" >name</td>
+
+        <td th:text="${hospital.address}">address</td>
+
+        <td><a th:href="@{/hospitals/profile/{hospitalId}(hospitalId=${hospital.id})}"><button>profile</button></a>
+
+        <td><form th:method="GET" th:action="@{/hospitals/{id}/deleteHospital (id=${hospital.id})}">
+                <input type="submit" value="Delete"/>
+            </form>
+        <td>
+            <a th:href="@{/hospitals/{id}/edit(id=${hospital.getId()})}">
+                <button>Update</button>
+            </a>
+        </td>
+
+    </tbody>
+    <input th:type="button" value="logout"
+    onclick="window.location.href='/logout'">
+</table>
+<input style=" display: block; margin:auto; font-size:30px;" type="button" value=" + Add Hospital"
+       onclick="window.location.href = 'hospitals/addHospital'">
+
+</body>
+</html>

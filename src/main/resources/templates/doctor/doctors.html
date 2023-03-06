@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:margin-top="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>DOCTOR </title>
+</head>
+<body>
+<div class="wrapper-btn">
+  <a th:href="@{/hospitals/profile/{hospitalId}(hospitalId=${hospitalId})}">
+  <button class="btn btn-primary" type="button"><~~</button>
+</a>
+
+</div>
+<h6>DOCTOR</h6>
+<table class="table">
+  <thead >
+  <tr>
+    <th scope="col">id</th>
+    <th scope="col">FIRST NAME </th>
+    <th scope="col">LAST NAME </th>
+    <th scope="col">EMAIL </th>
+    <th scope="col">POSITION</th>
+    <th scope="col">Update</th>
+    <th scope="col">DELETE</th>
+    <th scope="col">AssignDepartment </th>
+  </tr>
+  </thead >
+  <tbody>
+  <tr th:each="doctor : ${ doctors}" >
+    <th scope="row" th:text="${doctor.id}">id</th>
+    <th scope="row" th:text="${doctor.firstName}"> first name</th>
+    <th scope="row" th:text="${doctor.lastName}">last name</th>
+    <th scope="row" th:text="${doctor.email}"> email</th>
+    <th scope="row" th:text="${doctor.position}"> position</th>
+    <td>
+      <form th:method="GET" th:action="@{/doctors/deleteDoctor/{doctorId}(doctorId=${doctor.id})}">
+        <input type="submit" value="DELETE">
+      </form></td>
+    <td>
+      <form th:method="GET" th:action="@{/doctors/{doctorId}/editDoctor(doctorId=${doctor.id})}">
+        <input type="submit" value="UPDATE">
+      </form></td>
+    <td>
+      <form th:method="POST"
+            th:action="@{/doctors/{doctorId}/assignDoctor(doctorId=${doctor.id})}">
+        <select name="instructor" class="form-select form-select-sm" aria-label=".form-select-sm example"
+                th:object="${department}" th:field="*{id}">
+          <option th:each="department : ${departments}"
+                  th:value="${department.id}"
+                  th:text="${department.name}"></option>
+        </select>
+        <input type="submit" value="submit" class="input" />
+      </form>
+    </td>
+
+
+
+
+
+  </tr>
+
+
+  </tbody>
+</table>
+<div style="text-align:center; margin:auto; font-size: 30px;">
+  <form th:method="GET" th:action="@{/doctors/addDoctor/{hospitalId}(hospitalId=${hospitalId})}"><form><input type="submit" value="   + add doctor  "></form></form>
+</div>
+</body>
+</html>

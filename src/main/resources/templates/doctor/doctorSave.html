@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Add Doctor</title>
+</head>
+
+<div style="text-align:center; margin-top:200px; font-size: 30px;">
+    <body>
+    <div class="wrapper-btn">
+        <a th:href="@{/doctors/{id}(id=${hospitalId})}">
+            <button class="btn btn-primary" type="button"><~~</button>
+        </a>
+    </div>
+    <form th:action="@{/doctors/saveDoctor/{hospitalId}(hospitalId=${hospitalId})}"
+          th:object="${newDoctor}"
+          th:method="POST">
+
+        <div><div>
+                <input th:field="*{firstName}" type="text"  placeholder="Doctor first name" required >
+            <p style="color: red"  th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+        </div>
+            <div>
+                <input th:field="*{lastName}" type="text"  placeholder="Doctor last name" required >
+                <p style="color: red"  th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+            </div>
+            <div>
+                <input th:field="*{position}" type="text"  placeholder="Doctor position " required >
+                <p style="color: red"  th:if="${#fields.hasErrors('position')}" th:errors="*{position}"></p>
+            </div>
+
+            <div>
+                <input th:field="*{email}" type="email"  placeholder="email "  required  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" >
+                <p style="color: red"  th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+            </div>
+
+        </div>
+
+        <div><FORM>
+            <input type="submit" value="add doctor"></FORM>
+        </div>
+    </form>
+    </body>
+
+</div>
+</html>

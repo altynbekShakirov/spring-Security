@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Patient</title>
+</head>
+<div style="text-align:center; margin-top:200px; font-size: 30px;">
+
+    <body>
+    <div class="wrapper-btn">
+        <a th:href="@{/patients/{id}(id=${hospitalId})}">
+            <button class="btn btn-primary" type="button"><~~</button>
+        </a>
+    </div>
+    <form th:action="@{/patients/updateSavePatient/{patientId}(patientId=${patientId})}"
+          th:object="${oldPatient}"
+          th:method="POST">
+        <div>
+            <div>
+                <input th:field="*{firstName}" placeholder="First Name" required>
+                <p style="color: red"  th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+
+            </div>
+            <div>
+                <input th:field="*{lastName}" placeholder="Last Name" required>
+                <p style="color: red"  th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+
+            </div>
+            <div>
+                <input th:field="*{email}" type="email" placeholder=" Email" required>
+                <p style="color: red"  th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+
+            </div>
+            <div>
+                <input th:field="*{phoneNumber}" placeholder="Phone Number " required pattern="[+0-9]+">
+                <p style="color: red"  th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>
+
+            </div>
+            <div>
+                <select th:field="*{gender}"  required>
+                    <option th:value="${male}">MALE</option>
+                    <option th:value="${female}">FEMALE</option>
+                </select>
+            </div>
+
+        </div>
+        <div>
+            <input type="submit" value="update">
+        </div>
+    </form>
+    </body>
+</div>
+</html>
